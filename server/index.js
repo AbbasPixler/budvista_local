@@ -47,7 +47,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 var corsOptions =  {
-  origin: ["https://www.budvista.co", "https://api.budvista.co"],
+  origin: ["https://www.budvista.co", "https://api.budvista.co", "http://localhost:3000"],
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 }
@@ -70,7 +70,7 @@ mongoose
 
 
   
-app.post('/upload', async(req, res, next) => {
+app.post('/api/upload', async(req, res, next) => {
   console.log("right function")
   try {
     const myFile = req.file
@@ -89,14 +89,14 @@ app.post('/upload', async(req, res, next) => {
 })
 
 
-app.use("/auth", authRoute);
-app.use("/users", userRoute);
-app.use("/posts", postRoute);
-app.use("/shops", shopRoute);
-app.use("/qrCode", qrCodeRoute);
-app.use("/products", productRoute);
-app.use("/categories", categoryRoute);
-app.use("/product_categories", productCategoryRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);
+app.use("/api/shops", shopRoute);
+app.use("/api/qrCode", qrCodeRoute);
+app.use("/api/products", productRoute);
+app.use("/api/categories", categoryRoute);
+app.use("/api/product_categories", productCategoryRoute);
 
 // app.use(express.static(path.join(__dirname, "index.html")));
 // if (process.env.NODE_ENV === 'production') {

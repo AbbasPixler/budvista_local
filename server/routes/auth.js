@@ -3,9 +3,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const passport = require("passport")
 require("./../passport")
-
-// const CLIENT_URL =  "http://localhost:3000/"
-const CLIENT_URL =  "https://www.budvista.co/"
+const CLIENT_URL = require("./../clientUrl")
 
 
 

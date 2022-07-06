@@ -2,12 +2,12 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-// const GOOGLE_CLIENT_ID = "129289860315-1l7pfe7vo6u8k2kkklsj13m3geh104bi.apps.googleusercontent.com";
-// const GOOGLE_CLIENT_SECRET = "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";
-// const FACEBOOK_CLIENT_ID = "301804745494462"
-// const FACEBOOK_CLIENT_SECRET = "28d7db472f3fb55a4f857567c3acb055";
-
-const SocialBaseUrl = "https://api.budvista.co/";
+const GOOGLE_CLIENT_ID = "129289860315-1l7pfe7vo6u8k2kkklsj13m3geh104bi.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
+const FACEBOOK_CLIENT_ID = "301804745494462"
+const FACEBOOK_CLIENT_SECRET = "28d7db472f3fb55a4f857567c3acb055";
+// import {SocialBaseUrl} from "./serverUrl";
+const SocialBaseUrl = require("./serverUrl")
 
 
 // ===========================GOOGLE STRATEGY===========================
@@ -15,8 +15,8 @@ const SocialBaseUrl = "https://api.budvista.co/";
 // ===========================GOOGLE STRATEGY===========================
 
 passport.use(new GoogleStrategy({
-  clientID:     process.env.GOOGLE_CLIENT_ID,
-  clientSecret:  process.env.GOOGLE_CLIENT_SECRET,
+  clientID:     GOOGLE_CLIENT_ID,
+  clientSecret:  GOOGLE_CLIENT_SECRET,
   callbackURL:  SocialBaseUrl+"auth/google/callback",
   passReqToCallback   : true
 },
@@ -32,8 +32,8 @@ function(request, accessToken, refreshToken, profile, done){
 // ===========================FACEBOOK STRATEGY===========================
 
 passport.use(new FacebookStrategy({
-  clientID:     process.env.FACEBOOK_CLIENT_ID,
-  clientSecret:  process.env.FACEBOOK_CLIENT_SECRET,
+  clientID:     FACEBOOK_CLIENT_ID,
+  clientSecret:  FACEBOOK_CLIENT_SECRET,
   callbackURL: SocialBaseUrl+"auth/facebook/callback",
   passReqToCallback   : true,
 },

@@ -28,12 +28,12 @@ export default function Home() {
     let urlString = window.location.href.split("#")[0] 
     window.location.href = urlString
   }
-  if(window.location.href.split(":")[0] == "http"){
-    console.log("url: ",window.location.href.slice(4, -1))
-    let urlString = "https"+window.location.href.slice(4, -1) 
-    window.location.href = urlString
+  // if(window.location.href.split(":")[0] == "http"){
+  //   console.log("url: ",window.location.href.slice(4, -1))
+  //   let urlString = "https"+window.location.href.slice(4, -1) 
+  //   window.location.href = urlString
 
-  }
+  // }
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await axiosInstance.get("/posts/getposts/limitation");
