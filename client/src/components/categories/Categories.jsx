@@ -33,6 +33,8 @@ export default function Categories({ categories }) {
             <Category/>
           ))} */}
 
+        
+
           {categories.map((c) => (
             <Category category={c}/>
           ))}

@@ -7,7 +7,7 @@ var BudvistaBanner = PicBaseUrl + "BudvistaBanner.jpg"
 
 export default function Header() {
   return (
-    <div className="header">
+      <div className="header">
         <img className="headerImg" src={BudvistaBanner} alt="" />
         <div className="headerHead">
           <h1>Find cannis shop around you</h1>
@@ -22,6 +22,6 @@ export default function Header() {
             <span className="headerBtn">สนใจสร้างออนไลน์เมนู</span>
             </Link>
         </div> */}
-    </div>
+    </div>  
   )
 }
