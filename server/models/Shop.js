@@ -85,11 +85,11 @@ const ShopSchema = new mongoose.Schema(
         categories:[ String ],
         timings:[
           {
-          dayFrom: {
+          day: {
           type:String,
           required: false
         },
-        dayTo: {
+        shopStatus: {
           type:String,
           required: false
         },
