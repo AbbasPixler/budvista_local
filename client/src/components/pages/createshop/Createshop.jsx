@@ -377,7 +377,7 @@ return (
               alt=""
             />
             <label htmlFor="fileInput">
-              <i class="shopPpIcon fa-solid fa-plus"></i>
+              <i className="shopPpIcon fa-solid fa-plus"></i>
             </label>
             <input
               type="file"

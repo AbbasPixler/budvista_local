@@ -253,7 +253,7 @@ const SocialBaseUrl = "https://api.budvista.co/";
                       src={user.profilePic=="" ? PicBaseUrl+"noPreview.png" : PicBaseUrl+user.profilePic} 
                     />
                   </div>
-                  <i class="rightIcon fa-solid fa-caret-down"></i>
+                  <i className="rightIcon fa-solid fa-caret-down"></i>
                 </Button>
                 <Menu
                   id="basic-menu"
@@ -295,8 +295,8 @@ const SocialBaseUrl = "https://api.budvista.co/";
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
                 >
-                  <i class="rightIcon fa-solid fa-circle-user"></i>
-                  <i class="rightIcon fa-solid fa-caret-down"></i>
+                  <i className="rightIcon fa-solid fa-circle-user"></i>
+                  <i className="rightIcon fa-solid fa-caret-down"></i>
                 </Button>
                 <Menu
                   id="basic-menu"

@@ -82,7 +82,7 @@ export default function Profileinfo() {
                 alt=""
               />
               <label htmlFor="fileInput">
-                <i class="profilePpIcon fa-solid fa-plus"></i>
+                <i className="profilePpIcon fa-solid fa-plus"></i>
               </label>
               <input
                 type="file"

@@ -210,7 +210,7 @@ Please feel free to create posts with locations of other places that you’re aw
               <Link to="/Menus">
                 <div className="contactLeftText">
                   <h5>Click/Scan to view</h5>
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
               </Link>
             </div>
@@ -218,10 +218,10 @@ Please feel free to create posts with locations of other places that you’re aw
               <h1>Follow us on</h1>
               <div className="contactRightIcons">
                 <a href="https://www.facebook.com/eatout.solutions">
-                  <i class="contactRightIcon fa-brands fa-facebook-f"></i>
+                  <i className="contactRightIcon fa-brands fa-facebook-f"></i>
                 </a>
-                <i class="contactRightIcon fa-brands fa-instagram"></i>
-                <i class="contactRightIcon fa-brands fa-line"></i>
+                <i className="contactRightIcon fa-brands fa-instagram"></i>
+                <i className="contactRightIcon fa-brands fa-line"></i>
               </div>
             </div>
           </Container>
@@ -340,7 +340,7 @@ Please feel free to create posts with locations of other places that you’re aw
 //               <Link to="/Menus">
 //                 <div className="contactLeftText">
 //                   <h5>Click/Scan to view Menu</h5>
-//                   <i class="fa-solid fa-magnifying-glass"></i>
+//                   <i className="fa-solid fa-magnifying-glass"></i>
 //                 </div>
 //               </Link>
 //             </div>
@@ -348,10 +348,10 @@ Please feel free to create posts with locations of other places that you’re aw
 //               <h1>Follow us on</h1>
 //               <div className="contactRightIcons">
 //                 <a href="https://www.facebook.com/eatout.solutions">
-//                   <i class="contactRightIcon fa-brands fa-facebook-f"></i>
+//                   <i className="contactRightIcon fa-brands fa-facebook-f"></i>
 //                 </a>
-//                 <i class="contactRightIcon fa-brands fa-instagram"></i>
-//                 <i class="contactRightIcon fa-brands fa-line"></i>
+//                 <i className="contactRightIcon fa-brands fa-instagram"></i>
+//                 <i className="contactRightIcon fa-brands fa-line"></i>
 //               </div>
 //             </div>
 //           </Container>

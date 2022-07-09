@@ -262,7 +262,7 @@ export default function Editproduct() {
             <div className="productImg">
               <img src={file ? URL.createObjectURL(file) : PicBaseUrl + image.productImage} alt="" />
             <label htmlFor="fileInput">
-              <i class="addProductImg fa-solid fa-plus">
+              <i className="addProductImg fa-solid fa-plus">
               </i>
             </label>
                 <input type="file" id="fileInput" style = {{ display: "none" }} onChange={(e) => setFile(e.target.files[0])}/></div>

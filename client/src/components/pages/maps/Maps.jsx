@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
 import "./Maps.css";
@@ -7,10 +7,87 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {
+  withGoogleMap,
+  withScriptjs,
+  GoogleMap,
+  Marker,
+  InfoWindow
+} from "react-google-maps";
+import * as parkData from './skateboard-parks.json';
+import mapStyles from "./mapStyles";
+
+
+// ============================================================
+function Map() {
+  const [selectedPark, setSelectedPark] = useState(null);
+
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === "Escape") {
+        setSelectedPark(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
+
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, []);
+  // let featuresArray = parkData.features
+
+  return (
+    <GoogleMap
+      defaultZoom={10}
+      defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
+      defaultOptions={{ styles: mapStyles }}
+    >
+       {parkData.features.map((park) => {
+        <Marker
+          key={park.properties.PARK_ID}
+          position={{
+            lat: park.geometry.coordinates[1],
+            lng: park.geometry.coordinates[0]
+          }}
+          onClick={() => {
+            setSelectedPark(park);
+          }}
+          icon={{
+            url: `/skateboarding.svg`,
+            scaledSize: new window.google.maps.Size(25, 25)
+          }}
+        />
+        } )} 
+
+      {selectedPark && (
+        <InfoWindow
+          onCloseClick={() => {
+            setSelectedPark(null);
+          }}
+          position={{
+            lat: selectedPark.geometry.coordinates[1],
+            lng: selectedPark.geometry.coordinates[0]
+          }}
+        >
+          <div>
+            <h2>{selectedPark.properties.NAME}</h2>
+            <p>{selectedPark.properties.DESCRIPTIO}</p>
+          </div>
+        </InfoWindow>
+      )}
+    </GoogleMap>
+  );
+}
+
+const MapWrapped = withScriptjs(withGoogleMap(Map));
+
+// ============================================================
+
 
 const style = {
   display: "flex",
@@ -34,25 +111,42 @@ const style = {
 
 
 export default function Maps(){
+  const REACT_APP_GOOGLE_KEY = "AIzaSyCyHn--Okuy3Q62gDaGI_64tCuf1svZ97k"
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  return (
-    <div className="maps-main" style={{backgroundImage:"url(https://www.komar.de/en/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/4/-/4-050_worldmap_neu_ma_1.jpg)"}}>
-        <Container>
-            <div className="map-popup-outer">
 
+  const [open_1, setOpen_1] = React.useState(false);
+  const handleOpen_1 = () => setOpen_1(true);
+  const handleClose_1 = () => setOpen_1(false);
+
+  return (
+    <div className="maps-main">
+        <Container>
+            <div className="map-popup-outer" style={{ width: "100vw", height: "100vh" }}>
+          {/* =========================================== */}
+
+          <MapWrapped
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
+          REACT_APP_GOOGLE_KEY
+        }`}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `100%` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
+
+          {/* =========================================== */}
             <div>
-              <Button onClick={handleOpen}>Open modal</Button>
+              <Button onClick={handleOpen}>modal one</Button>
               <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box sx={style}>
+                <Box sx={style} onClick={handleClose}>
                   <div className="map-popup-modal">
                   <div className="map-popup-modal-outer">
                     <div className="map-popup-modal-upper">
@@ -137,6 +231,74 @@ export default function Maps(){
                       <div className="map-popup-view-btn">
                         <Link to="#" className="viewMorePosts">View Menu</Link>
                       </div>
+                    </div>
+                  </div>                
+                </div>
+                </Box>
+              </Modal>
+            </div> 
+
+            <div>
+              <Button onClick={handleOpen_1}>modal two</Button>
+              <Modal
+                open={open_1}
+                onClose={handleClose_1}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style} onClick={handleClose}>
+                  <div className="map-popup-modal">
+                  <div className="map-popup-modal-outer">
+                    <div className="map-popup-modal-upper map-popup-modal-upper_1">
+                      <p>search result cannabis shop around thonglhor</p>
+                    </div>
+
+                    <div className="map-popup-modal-image map-popup-modal-image_1">
+                      <div className="map-popup-modal-image-image">
+                        <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
+                      </div>
+                      <div className="map-popup-modal-image-content">
+                        <h6>Hightland cafe</h6>
+                        <p>Dispensary</p>
+                        <Link to="#" className="map-popup-modal-image-content-link">Open</Link>
+                      </div>
+                      <div className="map-popup-modal-heart">
+                        <FavoriteBorderIcon />
+                      </div>
+                    </div>
+
+                    <div className="map-popup-modal-image map-popup-modal-image_1">
+                      <div className="map-popup-modal-image-image">
+                        <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
+                      </div>
+                      <div className="map-popup-modal-image-content">
+                        <h6>Hightland cafe</h6>
+                        <p>Dispensary</p>
+                        <Link to="#" className="map-popup-modal-image-content-link">Open</Link>
+                      </div>
+                      <div className="map-popup-modal-heart">
+                        <FavoriteBorderIcon />
+                      </div>
+                    </div>
+
+                    <div className="map-popup-modal-image map-popup-modal-image_1">
+                      <div className="map-popup-modal-image-image">
+                        <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
+                      </div>
+                      <div className="map-popup-modal-image-content">
+                        <h6>Hightland cafe</h6>
+                        <p>Dispensary</p>
+                        <Link to="#" className="map-popup-modal-image-content-link">Open</Link>
+                      </div>
+                      <div className="map-popup-modal-heart">
+                        <FavoriteBorderIcon />
+                      </div>
+                    </div>
+
+
+                    <div className="map-popup-modal-upper map-popup-modal-upper_1 map-popup-modal-upper_2 ">
+                      <p>scroll for more</p>
+                      <Link to="#"><KeyboardArrowDownIcon /></Link>
                     </div>
                   </div>                
                 </div>

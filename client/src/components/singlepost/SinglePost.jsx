@@ -47,8 +47,8 @@ export default function SinglePost() {
           { post.title}
           { post.username === user?.username && (
             <div className="singlePostEdit">
-              <i class="fa-solid fa-pen"></i>
-              <i class="fa-solid fa-trash" onClick={handleDelete}></i>  
+              <i className="fa-solid fa-pen"></i>
+              <i className="fa-solid fa-trash" onClick={handleDelete}></i>  
             </div>
           )}
         </h1>

@@ -43,7 +43,7 @@ if(product.strainType){
         </div>        
       
          <div className="menu-content content-middle-Nm">
-          <h6> <span className="c-name" style={{color:strainColour}}> {product.strainType} </span> {product.recommended ? <span class="recommended"> Recommend </span>: <span></span>} </h6>
+          <h6> <span className="c-name" style={{color:strainColour}}> {product.strainType} </span> {product.recommended ? <span className="recommended"> Recommend </span>: <span></span>} </h6>
           <h3>{product.title}</h3>
 
            <p> THC : {product.THC}%</p>

@@ -248,7 +248,7 @@ export default function Addproduct() {
               <img src={URL.createObjectURL(file)} alt="" />
               }
             <label htmlFor="fileInput">
-              <i class="addProductImg fa-solid fa-plus">
+              <i className="addProductImg fa-solid fa-plus">
               </i>
             </label>
                 <input type="file" id="fileInput" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])}/></div>
@@ -279,6 +279,7 @@ export default function Addproduct() {
               variant="outlined"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              className="input_width"
             ></TextField>
               <TextField
                 fullWidth
@@ -288,6 +289,7 @@ export default function Addproduct() {
                 label="Select product type"
                 value={productType}
                 onChange={(e) => setProductType(e.target.value)}
+                className="input_width"
               >
                 {productTypeArray.map((option) => (
                   <MenuItem key={option} value={option}>
@@ -303,6 +305,7 @@ export default function Addproduct() {
                 label="Select strain type"
                 value={strainType}
                 onChange={(e) => setStrainType(e.target.value)}
+                className="input_width"
               >
                 {strainTypeArray.map((option) => (
                   <MenuItem key={option} value={option}>
@@ -318,6 +321,7 @@ export default function Addproduct() {
                 label="Select product category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                className="input_width"
               >
                 {productCategories.map((option) => (
                   <MenuItem key={option.name} value={option.name}>
@@ -337,6 +341,7 @@ export default function Addproduct() {
               InputProps={{
                 startAdornment: <InputAdornment position="end"><PercentIcon fontSize="small"/></InputAdornment>,
               }}
+              className="input_width"
               />
              
             <TextField
@@ -350,6 +355,7 @@ export default function Addproduct() {
               InputProps={{
                 startAdornment: <InputAdornment position="end"><PercentIcon fontSize="small"/></InputAdornment>
               }}
+              className="input_width"
             ></TextField>
             
       <FormControl sx={{ mt: 4, width: "40%" }}>

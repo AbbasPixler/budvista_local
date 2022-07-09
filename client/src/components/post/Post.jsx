@@ -22,7 +22,7 @@ export default function Post({ post }) {
         <div className="postBottom">
           <span className="postAuthor">
             <Link to={`/?user=${post.username}`} className="link">
-              <i class="fa-solid fa-user"></i>
+              <i className="fa-solid fa-user"></i>
               <a>{post.username}</a>
             </Link>
           </span>
