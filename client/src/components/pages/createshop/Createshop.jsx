@@ -41,9 +41,6 @@ export default function Createshop() {
   const [Facebook, setFacebook] = useState("");
   const [Twitter, setTwitter] = useState("");
   const [Youtube, setYoutube] = useState("");
-  const [Grab, setGrab] = useState("");
-  const [Lineman, setLineman] = useState("");
-  const [Robinhood, setRobinhood] = useState("");
   const [file, setFile] = useState(null);
   const { user } = useContext(Context);
   const [shop, setShop] = useState ([]);
@@ -80,62 +77,26 @@ export default function Createshop() {
   const [schedule7, setSchedule7] = useState([]);
   let scheduleData = []
   
-  // let day1 = []
-  // let day2 = []
-  // let day3 = []
-  // let day4 = []
-  // let day5 = []
-  // let day6 = []
-  // let day7 = []
+  let day1 = []
+  let day2 = []
+  let day3 = []
+  let day4 = []
+  let day5 = []
+  let day6 = []
+  let day7 = []
   
-  // day1.day = "Monday"
-  // day2.day = "Tuesday"
-  // day3.day = "Wednesday"
-  // day4.day = "Thursday"
-  // day5.day = "Friday"
-  // day6.day = "Saturday"
-  // day7.day = "Sunday"
+  day1.day = "Monday"
+  day2.day = "Tuesday"
+  day3.day = "Wednesday"
+  day4.day = "Thursday"
+  day5.day = "Friday"
+  day6.day = "Saturday"
+  day7.day = "Sunday"
 
-  // setSchedule1({...schedule1, ...day1})
-  // setSchedule2({...schedule2, ...day2})
-  // setSchedule3({...schedule3, ...day3})
-  // setSchedule4({...schedule4, ...day4})
-  // setSchedule5({...schedule5, ...day5})
-  // setSchedule6({...schedule6, ...day6})
-  // setSchedule7({...schedule7, ...day7})
+
  
 
-  const weekdays = [
-    {
-      value: "Monday",
-      label: "Monday",
-    },
-    {
-      value: "Tuesday",
-      label: "Tuesday",
-    },
-    {
-      value: "Wednesday",
-      label: "Wednesday",
-    },
-    {
-      value: "Thursday",
-      label: "Thursday",
-    },
-    {
-      value: "Friday",
-      label: "Friday",
-    },
-    {
-      value: "Saturday",
-      label: "Saturday",
-    },
-    {
-      value: "Sunday",
-      label: "Sunday",
-    },
-  
-  ];
+ 
 
   const shopStatus = [
     {
@@ -148,11 +109,6 @@ export default function Createshop() {
     }
   ];
 
-  console.log(schedule1)
-  console.log(schedule2)
-  console.log(schedule3)
-  console.log(schedule4)
-
   //=================Shop Timings Diabled============================ 
   //=================Shop Timings Diabled============================ 
   //=================Shop Timings Diabled============================ 
@@ -164,29 +120,19 @@ export default function Createshop() {
   const[FridayTimingDisabled, setFridayTimingDisabled] = useState(true)
   const[SaturdayTimingDisabled, setSaturdayTimingDisabled] = useState(true)
   const[SundayTimingDisabled, setSundayTimingDisabled] = useState(true)
+  // const[shopStatusStateMon, setShopStatusStateMon] = useState("Closed")
+  // const[shopStatusStateTue, setShopStatusStateTue] = useState("Closed")
+  // const[shopStatusStateWed, setShopStatusStateWed] = useState("Closed")
+  // const[shopStatusStateThu, setShopStatusStateThu] = useState("Closed")
+  // const[shopStatusStateFri, setShopStatusStateFri] = useState("Closed")
+  // const[shopStatusStateSat, setShopStatusStateSat] = useState("Closed")
+  // const[shopStatusStateSun, setShopStatusStateSun] = useState("Closed")
 
 
   // ================================================================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let day1 = []
-    let day2 = []
-    let day3 = []
-    let day4 = []
-    let day5 = []
-    let day6 = []
-    let day7 = []
-    
-    day1.day = "Monday"
-    day2.day = "Tuesday"
-    day3.day = "Wednesday"
-    day4.day = "Thursday"
-    day5.day = "Friday"
-    day6.day = "Saturday"
-    day7.day = "Sunday"
-  
     setSchedule1({...schedule1, ...day1})
     setSchedule2({...schedule2, ...day2})
     setSchedule3({...schedule3, ...day3})
@@ -194,6 +140,7 @@ export default function Createshop() {
     setSchedule5({...schedule5, ...day5})
     setSchedule6({...schedule6, ...day6})
     setSchedule7({...schedule7, ...day7})
+
 
     if(!file || !shopTitle || !shopDesc || !telephone || !address){
       setOpen(true)
@@ -210,10 +157,7 @@ export default function Createshop() {
       facebook: Facebook,
       twitter:Twitter,
       youtube:Youtube,
-      grab:Grab,
-      lineman:Lineman,
-      robinhood:Robinhood,
-      timings:[schedule1,schedule2,schedule3],
+      timings:[schedule1,schedule2,schedule3,schedule4,schedule5,schedule6,schedule7],
       categories:checkboxItems
     };
     if (file) {
@@ -245,11 +189,18 @@ export default function Createshop() {
   // update function============================================
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
+    setSchedule1({...schedule1, ...day1})
+    setSchedule2({...schedule2, ...day2})
+    setSchedule3({...schedule3, ...day3})
+    setSchedule4({...schedule4, ...day4})
+    setSchedule5({...schedule5, ...day5})
+    setSchedule6({...schedule6, ...day6})
+    setSchedule7({...schedule7, ...day7})
     
-    console.log(schedule1)
-    console.log(schedule2)
-    console.log(schedule3)
-    console.log(schedule4)
+    // console.log(schedule1)
+    // console.log(schedule2)
+    // console.log(schedule3)
+    // console.log(schedule4)
     
     
     const newShop = {
@@ -262,9 +213,6 @@ export default function Createshop() {
       facebook: Facebook,
       twitter:Twitter,
       youtube:Youtube,
-      grab:Grab,
-      lineman:Lineman,
-      robinhood:Robinhood,
       timings:[schedule1,schedule2,schedule3,schedule4,schedule5,schedule6,schedule7],
       categories:checkboxItems
     };
@@ -303,6 +251,7 @@ export default function Createshop() {
   useEffect(() => {
     const getShop = async () => {
       const res = await axiosInstance.get('/shops/' +user.username)
+      console.log("resonse:-", res.data[0].timings[0])
       if(res.data[0]){
         setButton("Update")
         setShop(res.data[0])
@@ -315,17 +264,45 @@ export default function Createshop() {
         setFacebook(res.data[0].facebook)
         setTwitter(res.data[0].twitter)
         setYoutube(res.data[0].youtube)
-        setGrab(res.data[0].grab)
-        setLineman(res.data[0].lineman)
-        setRobinhood(res.data[0].robinhood)
         setSchedule1(res.data[0].timings[0])
         setSchedule2(res.data[0].timings[1])
         setSchedule3(res.data[0].timings[2])
+        setSchedule4(res.data[0].timings[3])
+        setSchedule5(res.data[0].timings[4])
+        setSchedule6(res.data[0].timings[5])
+        setSchedule7(res.data[0].timings[6])
         setCheckboxItems(res.data[0].categories)
+        // setShopStatusStateMon(res.data[0].timings[0].shopStatus)
+        if(schedule1.shopStatus === "Open"){
+          console.log("YEs", schedule1.shopStatus)
+          setMondayTimingDisabled(false)
+        }
+        if(schedule7.shopStatus === "Open"){
+          console.log("YEs", schedule7.shopStatus)
+          setSundayTimingDisabled(false)
+        } if(schedule2.shopStatus === "Open"){
+          console.log("YEs", schedule2.shopStatus)
+          setTuesdayTimingDisabled(false)
+        } if(schedule3.shopStatus === "Open"){
+          console.log("YEs", schedule3.shopStatus)
+          setWednesdayTimingDisabled(false)
+        } if(schedule4.shopStatus === "Open"){
+          console.log("YEs", schedule4.shopStatus)
+          setThursdayTimingDisabled(false)
+        } if(schedule5.shopStatus === "Open"){
+          console.log("YEs", schedule5.shopStatus)
+          setFridayTimingDisabled(false)
+        } if(schedule6.shopStatus === "Open"){
+          console.log("YEs", schedule6.shopStatus)
+          setSaturdayTimingDisabled(false)
+        }
       }
     };
     getShop()
   }, [])
+
+  // console.log(schedule1.shopStatus)
+  // console.log(MondayTimingDisabled)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -487,39 +464,6 @@ return (
                 onChange={(e) => setYoutube(e.target.value)}
               />
             </Box>
-            {/* <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-              <InsertPhotoIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-              <TextField
-                sx={{ mt: 2, width: "60%", height: "50%" }}
-                id="input-with-sx"
-                placeholder="Grab URL"
-                variant="standard"
-                value={Grab}
-                onChange={(e) => setGrab(e.target.value)}
-              />
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-              <InsertPhotoIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-              <TextField
-                sx={{ mt: 2, width: "60%", height: "50%" }}
-                id="input-with-sx"
-                placeholder="Lineman URL"
-                variant="standard"
-                value={Lineman}
-                onChange={(e) => setLineman(e.target.value)}
-              />
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-              <InsertPhotoIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-              <TextField
-                sx={{ mt: 2, width: "60%", height: "50%" }}
-                id="input-with-sx"
-                placeholder="Robinhood URL"
-                variant="standard"
-                value={Robinhood}
-                onChange={(e) => setRobinhood(e.target.value)}
-              />
-            </Box> */}
            <div className="catlabel">
               <label>Category</label>
               <div className="checkcategory">              
@@ -548,11 +492,6 @@ return (
               value="Monday"
               label="Day"
             >
-              {weekdays.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
             </TextField>
             <TextField
               fullWidth
@@ -560,14 +499,18 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule1.shopStatus == 0 ? 'Closed' : schedule1.shopStatus}
+              value={schedule1.shopStatus == "Open"? "Enter Hours" : "Closed"}
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule1({...schedule1, ...scheduleData})
+                console.log( "On change",e.target.value)
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule1({...schedule1, ...scheduleData})
                   setMondayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule1({...schedule1, ...scheduleData})
                   setMondayTimingDisabled(false)
                 }
               }}
@@ -626,14 +569,17 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule2.shopStatus == 0 ? 'Closed' : schedule2.shopStatus}
+              value={schedule2.shopStatus  == "Open" ? "Enter Hours" : "Closed"}
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule2({...schedule2, ...scheduleData})
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule2({...schedule2, ...scheduleData})
                   setTuesdayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule2({...schedule2, ...scheduleData})
                   setTuesdayTimingDisabled(false)
                 }
               }}
@@ -671,12 +617,12 @@ return (
                 }}
               />
             </FormControl>
-          </div>
+              </div>
 
           {/* ===========Wednesday========== */}
 
           
-          <div className="Weekdays">
+        <div className="Weekdays">
             <TextField
             className="wednesday"
               fullWidth
@@ -692,14 +638,17 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule3.shopStatus == 0 ? 'Closed' : schedule3.shopStatus}
+              value={schedule3.shopStatus  == "Open" ? "Enter Hours" : "Closed"}
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule3({...schedule3, ...scheduleData})
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule3({...schedule3, ...scheduleData})
                   setWednesdayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule3({...schedule3, ...scheduleData})
                   setWednesdayTimingDisabled(false)
                 }
               }}
@@ -737,7 +686,7 @@ return (
                 }}
               />
             </FormControl>
-          </div>
+          </div> 
 
           {/* ===========Thursday========== */}
 
@@ -758,14 +707,17 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule4.shopStatus == 0 ? 'Closed' : schedule4.shopStatus}
+              value={schedule4.shopStatus === "Open" ? "Enter Hours" : "Closed"}
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule4({...schedule4, ...scheduleData})
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule4({...schedule4, ...scheduleData})
                   setThursdayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule4({...schedule4, ...scheduleData})
                   setThursdayTimingDisabled(false)
                 }
               }}
@@ -824,14 +776,17 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule5.shopStatus == 0 ? 'Closed' : schedule5.shopStatus}
+              value={schedule5.shopStatus  == "Open" ? "Enter Hours" : "Closed"}
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule5({...schedule5, ...scheduleData})
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule5({...schedule5, ...scheduleData})
                   setFridayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule5({...schedule5, ...scheduleData})
                   setFridayTimingDisabled(false)
                 }
               }}
@@ -889,14 +844,17 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule6.shopStatus == 0 ? 'Closed' : schedule6.shopStatus}
+              value={schedule6.shopStatus  == "Open" ? "Enter Hours" : "Closed"}
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule6({...schedule6, ...scheduleData})
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule6({...schedule6, ...scheduleData})
                   setSaturdayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule6({...schedule6, ...scheduleData})
                   setSaturdayTimingDisabled(false)
                 }
               }}
@@ -956,14 +914,17 @@ return (
               id="outlined-select-closingday"
               select
               label="To"
-              value={schedule7.shopStatus == 0 ? 'Closed' : schedule7.shopStatus}
+              value={schedule7.shopStatus  == "Open" ? "Enter Hours" : "Closed" }
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule7({...schedule7, ...scheduleData})
                 if(e.target.value === "Closed"){
-                 console.log( e.target.value)
+                  scheduleData.shopStatus = e.target.value
+                  setSchedule7({...schedule7, ...scheduleData})
                   setSundayTimingDisabled(true)
                 }else{
+                  scheduleData.shopStatus = "Open"
+                  setSchedule7({...schedule7, ...scheduleData})
                   setSundayTimingDisabled(false)
                 }
               }}
@@ -1001,7 +962,7 @@ return (
                 }}
               />
             </FormControl>
-          </div>
+          </div> 
           {/* <div className="Weekdays">
             <TextField
               fullWidth

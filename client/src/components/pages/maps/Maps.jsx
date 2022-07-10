@@ -19,9 +19,10 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import * as parkData from './skateboard-parks.json';
-import mapStyles from "./mapStyles";
+import parkData from './skateboard-parks.json';
 
+import mapStyles from "./mapStyles";
+console.log(parkData);
 
 // ============================================================
 function Map() {
@@ -47,7 +48,7 @@ function Map() {
       defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
       defaultOptions={{ styles: mapStyles }}
     >
-       {parkData.features.map((park) => {
+      {parkData.features.map(park => (
         <Marker
           key={park.properties.PARK_ID}
           position={{
@@ -62,7 +63,7 @@ function Map() {
             scaledSize: new window.google.maps.Size(25, 25)
           }}
         />
-        } )} 
+      ))}
 
       {selectedPark && (
         <InfoWindow
