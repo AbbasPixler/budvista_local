@@ -123,7 +123,7 @@ function App() {
         <Route path="/profileinfo" element={user ? <Profileinfo /> :<Register/>}></Route>
         <Route path="/createshop" element={user ? <Createshop /> :<Register/>}></Route>
         <Route path="/Events" element={<Events />}></Route>
-        <Route path="/ShopDetails" element={<ShopDetails />}></Route>
+        <Route path="/ShopDetails/:postId" element={<ShopDetails />}></Route>
         <Route path="/Maps" element={<Maps />}></Route>
       </Routes>
     </Router>

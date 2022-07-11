@@ -59,8 +59,9 @@ function Map() {
             setSelectedPark(park);
           }}
           icon={{
-            url: `/skateboarding.svg`,
-            scaledSize: new window.google.maps.Size(25, 25)
+            url: `/skateboarding.png`,
+
+            scaledSize: new window.google.maps.Size(75, 75)
           }}
         />
       ))}

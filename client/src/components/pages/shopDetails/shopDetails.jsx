@@ -15,17 +15,65 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { axiosInstance } from "./../../../config";
+// import { PicBaseUrl } from "./../../../imageBaseUrl";
+import { Context } from "./../../../context/Context";
 
 var BudvistaBanner = PicBaseUrl + "BudvistaBanner.jpg"
 
 
 
 export default function ShopDetails(){
+
+  const[products, setProducts] = useState([])
+  const[shop, setShop] = useState([])
+  const[recommendedProducts, setRecommendedProducts] = useState([])
+  const[events, setEvents] = useState([])
+
+  const location = useLocation()
+  const path = (location.pathname.split("/")[2])
+
+  useEffect(() => {
+    const getShop = async () => {
+      const res = await axiosInstance.get('/shops/' + path)
+      setShop(res.data[0])
+    };
+    getShop()
+  },[path])
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const res = await axiosInstance.get("/products/recommended/" + path)
+      setRecommendedProducts(res.data)
+    }
+    fetchProduct();
+  },[path])
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const res = await axiosInstance.get("/products/" + path)
+      setProducts(res.data)
+    }
+    fetchProduct();
+  },[path])
+
+  useEffect(()=>{
+    const fetchEvent = async () => {
+      const res = await axiosInstance.get("/posts/getPostsByUsername/" + path)
+      setEvents(res.data)
+    }
+    fetchEvent();
+  }, [path]);
+  console.log(events)
+
+
   return(
     <div>
        <Container>
        <div className="header">
-        <img className="headerImg" src={BudvistaBanner} alt="" />
+        <img className="headerImg" src={PicBaseUrl + shop.coverPhoto} alt="" />
         {/* <div className="headerHead">
           <h1>Find cannis shop around you</h1>
           <a href="#" className="headerBtn">View Map <MapIcon/>
@@ -43,21 +91,31 @@ export default function ShopDetails(){
 
        {/* shop-title */}
        <div className="shop-title">
-          <div className="shop-location"> <p><LocationOnIcon/>Sathorn, Bangkok</p></div>
+          <div className="shop-location"> <p><LocationOnIcon/>{shop.address}</p></div>
           <div className="shop-content">
-            <h2>Cannabis Shop Title</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique nulla fuga, laborum facere labore adipisci deleniti at animi? Voluptate quaerat consequatur asperiores, distinctio perspiciatis doloribus non consequuntur nesciunt exercitationem repudiandae.</p>
-         </div>
+            <h2>{shop.shopTitle}</h2>
+            <p>{shop.shopDesc}</p>
+         </div> 
           <div className="shop-share"> <p> <IosShareIcon/> Share</p></div>
        </div>
 
        <div className="recommended-product">
           <div className="postsTitle">
-            <h1>Promotion Events</h1>
+            <h1>Recommended Products</h1>
           </div>
 
           <div className="recommended-product-inner">
-            <div className="recommended-product-inner-inner">
+           { recommendedProducts.map((product)=>{
+              return(
+                
+                  <div className="recommended-product-inner-inner">
+                  <img src="https://storage.googleapis.com/snackyo/1655886005408pexels-kindel-media-7773110.jpg" />
+                </div>
+                
+         
+              )
+            })}
+            {/* <div className="recommended-product-inner-inner">
               <img src="https://storage.googleapis.com/snackyo/1655886005408pexels-kindel-media-7773110.jpg" />
             </div>
             <div className="recommended-product-inner-inner">
@@ -68,13 +126,13 @@ export default function ShopDetails(){
             </div>
             <div className="recommended-product-inner-inner">
               <img src="	https://storage.googleapis.com/snackyo/1655886965842pexels-elsa-olofsson-5079421.jpg" />
-            </div>
+            </div> */}
           </div>
        </div>
 
        <div className="event-map">
           <div className="postsTitle">
-            <h1>Events and Promothion</h1>
+            <h1>Events and Promotion</h1>
           </div>
           <MdChevronLeft
           size={25}
@@ -83,25 +141,22 @@ export default function ShopDetails(){
         />
 
           <div className="promotion-slider"  id="slider">
-            <div className="promotion-slider-inner">
-              <div className="promotion-slider-image">
-                <img src="https://images.pexels.com/photos/7667801/pexels-photo-7667801.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+            {events.map(event=>{
+              const date = event.createdAt.split("T")[0]
+              return (
+                <div className="promotion-slider-inner">
+                <div className="promotion-slider-image">
+                  <img src={PicBaseUrl + event.photo} />
+                </div>
+                <div className="promotion-slider-content">
+                  <p>{event.title}</p>
+                  <p>{date}</p>
+                </div>
               </div>
-              <div className="promotion-slider-content">
-                <p>Shop promotion</p>
-                <p>10/11/10</p>
-              </div>
-            </div>
-            <div className="promotion-slider-inner">
-              <div className="promotion-slider-image">
-                <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
-              </div>
-              <div className="promotion-slider-content">
-                <p>Shop promotion</p>
-                <p>10/11/10</p>
-              </div>
-            </div>
-            <div className="promotion-slider-inner">
+              )
+            })}
+          
+            {/* <div className="promotion-slider-inner">
               <div className="promotion-slider-image">
                 <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
               </div>
@@ -119,6 +174,15 @@ export default function ShopDetails(){
                 <p>10/11/10</p>
               </div>
             </div>
+            <div className="promotion-slider-inner">
+              <div className="promotion-slider-image">
+                <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
+              </div>
+              <div className="promotion-slider-content">
+                <p>Shop promotion</p>
+                <p>10/11/10</p>
+              </div>
+            </div> */}
           </div>
 
 

@@ -5,7 +5,8 @@ import { PicBaseUrl } from "../../imageBaseUrl";
 
 export default function Shop({shop}) {
   return (
-    <Link to={`/shop/${shop.username}`} className="shop">
+    // <Link to={`/shop/${shop.username}`} className="shop">
+       <Link to={`/shopDetails/${shop.username}`} className="shop">
       <>
         <div className="shopCard">
           {shop.coverPhoto && 
