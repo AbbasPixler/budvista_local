@@ -27,10 +27,23 @@ var BudvistaBanner = PicBaseUrl + "BudvistaBanner.jpg"
 
 export default function ShopDetails(){
 
+  const slideLeft = () => {
+    const slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+
+  const slideRight = () => {
+    const slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
+
+
   const[products, setProducts] = useState([])
   const[shop, setShop] = useState([])
   const[recommendedProducts, setRecommendedProducts] = useState([])
   const[events, setEvents] = useState([])
+  const[shopOpen, setShopOpen] = useState("Close")
+  const [closeTime, setCloseTime] = useState("")
 
   const location = useLocation()
   const path = (location.pathname.split("/")[2])
@@ -64,29 +77,44 @@ export default function ShopDetails(){
       const res = await axiosInstance.get("/posts/getPostsByUsername/" + path)
       setEvents(res.data)
     }
+  //   let newDate = new Date().getDay()
+  // if(newDate == 1 && shop.timings[0].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[0].timeTo)
+  // }
+  // if(newDate == 2 && shop.timings[1].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[1].timeTo)
+  // }
+  // if(newDate == 3 && shop.timings[2].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[2].timeTo)
+  // }
+  // if(newDate == 4 && shop.timings[3].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[3].timeTo)
+  // }
+  // if(newDate == 5 && shop.timings[4].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[4].timeTo)
+  // }
+  // if(newDate == 6 && shop.timings[5].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[5].timeTo)
+  // }
+  // if(newDate == 7 && shop.timings[6].shopStatus == "Open"){
+  //   setShopOpen("Open")
+  //   setCloseTime(shop.timings[6].timeTo)
+  // }
     fetchEvent();
   }, [path]);
-  console.log(events)
-
 
   return(
     <div>
        <Container>
        <div className="header">
         <img className="headerImg" src={PicBaseUrl + shop.coverPhoto} alt="" />
-        {/* <div className="headerHead">
-          <h1>Find cannis shop around you</h1>
-          <a href="#" className="headerBtn">View Map <MapIcon/>
-
-</a>
-        </div> */}
-        {/* <div className="headerTitles">
-            <span className="headerTitlesSm">สร้างออนไลน์เมนูสำหรับร้านของคุณได้แล้ววันนี้</span>
-            <span className="headerTitlesLg">BUDVISTA</span>
-            <Link to={'/Menutemplate'}>
-            <span className="headerBtn">สนใจสร้างออนไลน์เมนู</span>
-            </Link>
-        </div> */}
+        
        </div>  
 
        {/* shop-title */}
@@ -111,22 +139,8 @@ export default function ShopDetails(){
                   <div className="recommended-product-inner-inner">
                   <img src="https://storage.googleapis.com/snackyo/1655886005408pexels-kindel-media-7773110.jpg" />
                 </div>
-                
-         
               )
             })}
-            {/* <div className="recommended-product-inner-inner">
-              <img src="https://storage.googleapis.com/snackyo/1655886005408pexels-kindel-media-7773110.jpg" />
-            </div>
-            <div className="recommended-product-inner-inner">
-              <img src="	https://storage.googleapis.com/snackyo/1655886296008pexels-kindel-media-7773108.jpg" />
-            </div>
-            <div className="recommended-product-inner-inner">
-              <img src="https://storage.googleapis.com/snackyo/1655886654821pexels-dad-grass-9290608.jpg" />
-            </div>
-            <div className="recommended-product-inner-inner">
-              <img src="	https://storage.googleapis.com/snackyo/1655886965842pexels-elsa-olofsson-5079421.jpg" />
-            </div> */}
           </div>
        </div>
 
@@ -137,7 +151,7 @@ export default function ShopDetails(){
           <MdChevronLeft
           size={25}
           className="slider-icon iconLeft"
-          // onClick={slideLeft}
+          onClick={slideLeft}
         />
 
           <div className="promotion-slider"  id="slider">
@@ -155,41 +169,13 @@ export default function ShopDetails(){
               </div>
               )
             })}
-          
-            {/* <div className="promotion-slider-inner">
-              <div className="promotion-slider-image">
-                <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
-              </div>
-              <div className="promotion-slider-content">
-                <p>Shop promotion</p>
-                <p>10/11/10</p>
-              </div>
-            </div>
-            <div className="promotion-slider-inner">
-              <div className="promotion-slider-image">
-                <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
-              </div>
-              <div className="promotion-slider-content">
-                <p>Shop promotion</p>
-                <p>10/11/10</p>
-              </div>
-            </div>
-            <div className="promotion-slider-inner">
-              <div className="promotion-slider-image">
-                <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
-              </div>
-              <div className="promotion-slider-content">
-                <p>Shop promotion</p>
-                <p>10/11/10</p>
-              </div>
-            </div> */}
           </div>
 
 
         <MdChevronRight
           size={25}
           className="slider-icon iconRight"
-          // onClick={slideRight}
+          onClick={slideRight}
         />
        </div>
 
@@ -201,9 +187,9 @@ export default function ShopDetails(){
           <div className="shop-info-inner">
             <div className="shop-info-info">
               <ul>
-                <li><p><AccessTimeIcon /> <span className="open">open now </span> : <span className="close"> Close 20:00</span></p></li>
-                <li><p><LocationOnIcon/> 111/11 sathorn, bangkok, bangkok, thailand 10123</p></li>
-                <li><p><LocalPhoneIcon /> 0832-234--1023</p></li>
+                <li><p><AccessTimeIcon /> <span className="open">{shopOpen}</span> : <span className="close"> Close {closeTime}</span></p></li>
+                <li><p><LocationOnIcon/> {shop.address}</p></li>
+                <li><p><LocalPhoneIcon /> {shop.telephone}</p></li>
               </ul>
             </div>
             <div className="shop-info-map">
@@ -218,13 +204,13 @@ export default function ShopDetails(){
         </div>
         <div className="follow-section-content">
           <div className="follow-section-image">
-              <p className="insta"><InstagramIcon /></p>
-              <p className="face"><FacebookIcon /></p>
-              <p className="tweet"><TwitterIcon /></p>
-              <p className="youtube"><YouTubeIcon /></p>
-          </div>
+              <Link className="insta" to={shop.instagram}><InstagramIcon/></Link>
+              <Link  className="face" to={shop.facebook}><FacebookIcon/></Link>
+              <Link className="tweet" to={shop.twitter}><TwitterIcon/></Link>
+              <Link className="youtube" to={shop.youtube}><YouTubeIcon/></Link>
+          </div> 
           <div className="follow-product-btn">
-            <Link className="viewMorePosts" to="#">View product</Link>
+          <Link className="viewMorePosts" to={`/shop/${shop.username}`}>View product</Link>
           </div>
         </div>
        </div>
