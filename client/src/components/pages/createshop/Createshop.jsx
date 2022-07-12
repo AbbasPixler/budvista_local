@@ -25,6 +25,8 @@ import Button from "@mui/material/Button";
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
+import Autocomplete from "react-google-autocomplete";
+import { usePlacesWidget } from "react-google-autocomplete";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -197,11 +199,6 @@ export default function Createshop() {
     setSchedule6({...schedule6, ...day6})
     setSchedule7({...schedule7, ...day7})
     
-    // console.log(schedule1)
-    // console.log(schedule2)
-    // console.log(schedule3)
-    // console.log(schedule4)
-    
     
     const newShop = {
       username:user.username,
@@ -251,7 +248,6 @@ export default function Createshop() {
   useEffect(() => {
     const getShop = async () => {
       const res = await axiosInstance.get('/shops/' +user.username)
-      console.log("resonse:-", res.data[0].timings[0])
       if(res.data[0]){
         setButton("Update")
         setShop(res.data[0])
@@ -274,26 +270,19 @@ export default function Createshop() {
         setCheckboxItems(res.data[0].categories)
         // setShopStatusStateMon(res.data[0].timings[0].shopStatus)
         if(schedule1.shopStatus === "Open"){
-          console.log("YEs", schedule1.shopStatus)
           setMondayTimingDisabled(false)
         }
         if(schedule7.shopStatus === "Open"){
-          console.log("YEs", schedule7.shopStatus)
           setSundayTimingDisabled(false)
         } if(schedule2.shopStatus === "Open"){
-          console.log("YEs", schedule2.shopStatus)
           setTuesdayTimingDisabled(false)
         } if(schedule3.shopStatus === "Open"){
-          console.log("YEs", schedule3.shopStatus)
           setWednesdayTimingDisabled(false)
         } if(schedule4.shopStatus === "Open"){
-          console.log("YEs", schedule4.shopStatus)
           setThursdayTimingDisabled(false)
         } if(schedule5.shopStatus === "Open"){
-          console.log("YEs", schedule5.shopStatus)
           setFridayTimingDisabled(false)
         } if(schedule6.shopStatus === "Open"){
-          console.log("YEs", schedule6.shopStatus)
           setSaturdayTimingDisabled(false)
         }
       }
@@ -301,8 +290,6 @@ export default function Createshop() {
     getShop()
   }, [])
 
-  // console.log(schedule1.shopStatus)
-  // console.log(MondayTimingDisabled)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -364,6 +351,8 @@ return (
             />
           </div>
 
+
+
           <div className="shopFormBody">
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <HomeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
@@ -381,11 +370,26 @@ return (
               />
             </Box>
 
+            <Autocomplete
+              apiKey={process.env.REACT_APP_GOOGLE_KEY}
+              onPlaceSelected={(place) => {
+                console.log(place)
+              }}
+              options={{
+               
+                componentRestrictions: { country: "TH" },
+              }}
+              defaultValue="Indore"
+              onChange={(e)=>{
+                console.log(e.target.value)
+              }}
+            />
+
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <ArticleIcon sx={{ color: "action.active", mr: 1, my: 0.5 }}/>
               <TextField
                 fullWidth
-                sx={{ mt: 2, width: "60%", height: "50p%" }}
+                sx={{ mt: 2, width: "60%", height: "50%" }}
                 id="standard-multiline-flexible"
                 placeholder="Shop Description"
                 multiline
@@ -503,7 +507,6 @@ return (
               onChange={(e) => {
                 scheduleData.dayTo = e.target.value
                 setSchedule1({...schedule1, ...scheduleData})
-                console.log( "On change",e.target.value)
                 if(e.target.value === "Closed"){
                   scheduleData.shopStatus = e.target.value
                   setSchedule1({...schedule1, ...scheduleData})

@@ -1,5 +1,4 @@
 import React from "react";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import Header from "../../header/Header"
 import "./map.css"
 import  { PicBaseUrl } from "../../../imageBaseUrl";
@@ -20,6 +19,7 @@ import { useEffect, useState, useContext } from "react";
 import { axiosInstance } from "./../../../config";
 // import { PicBaseUrl } from "./../../../imageBaseUrl";
 import { Context } from "./../../../context/Context";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 var BudvistaBanner = PicBaseUrl + "BudvistaBanner.jpg"
 
@@ -45,6 +45,8 @@ export default function ShopDetails(){
   const[shopOpen, setShopOpen] = useState("Close")
   const [closeTime, setCloseTime] = useState("")
 
+  const { user } = useContext(Context);
+  console.log(user)
   const location = useLocation()
   const path = (location.pathname.split("/")[2])
 
@@ -52,6 +54,37 @@ export default function ShopDetails(){
     const getShop = async () => {
       const res = await axiosInstance.get('/shops/' + path)
       setShop(res.data[0])
+
+      let newDate = new Date().getDay() 
+     
+    if(newDate == 1 && res.data[0].timings[0].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[0].timeTo)
+    }
+    if(newDate == 2 && res.data[0].timings[1].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[1].timeTo)
+    }
+    if(newDate == 3 && res.data[0].timings[2].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[2].timeTo)
+    }
+    if(newDate == 4 && res.data[0].timings[3].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[3].timeTo)
+    }
+    if(newDate == 5 && res.data[0].timings[4].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[4].timeTo)
+    }
+    if(newDate == 6 && res.data[0].timings[5].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[5].timeTo)
+    }
+    if(newDate == 7 && res.data[0].timings[6].shopStatus == "Open"){
+      setShopOpen("Open")
+      setCloseTime(res.data[0].timings[6].timeTo)
+    }
     };
     getShop()
   },[path])
@@ -77,37 +110,11 @@ export default function ShopDetails(){
       const res = await axiosInstance.get("/posts/getPostsByUsername/" + path)
       setEvents(res.data)
     }
-  //   let newDate = new Date().getDay()
-  // if(newDate == 1 && shop.timings[0].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[0].timeTo)
-  // }
-  // if(newDate == 2 && shop.timings[1].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[1].timeTo)
-  // }
-  // if(newDate == 3 && shop.timings[2].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[2].timeTo)
-  // }
-  // if(newDate == 4 && shop.timings[3].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[3].timeTo)
-  // }
-  // if(newDate == 5 && shop.timings[4].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[4].timeTo)
-  // }
-  // if(newDate == 6 && shop.timings[5].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[5].timeTo)
-  // }
-  // if(newDate == 7 && shop.timings[6].shopStatus == "Open"){
-  //   setShopOpen("Open")
-  //   setCloseTime(shop.timings[6].timeTo)
-  // }
     fetchEvent();
   }, [path]);
+
+  console.log(events.length)
+console.log(events == null)
 
   return(
     <div>
@@ -155,20 +162,35 @@ export default function ShopDetails(){
         />
 
           <div className="promotion-slider"  id="slider">
-            {events.map(event=>{
-              const date = event.createdAt.split("T")[0]
-              return (
+            { events.length == 0 ?
+            user 
+            ? 
+            <div className="addeventButton">
+          <Link className="addEventLink" to="/Blog">Add Events</Link>
+          </div>
+            :
+            <div className="noEventsdiv">No events</div>
+            
+            :
+            
+              events.map(event=>{
+                const date = event.createdAt.split("T")[0]
+                return (
                 <div className="promotion-slider-inner">
-                <div className="promotion-slider-image">
-                  <img src={PicBaseUrl + event.photo} />
+                  <div className="promotion-slider-image">
+                    <img src={PicBaseUrl + event.photo} />
+                  </div>
+                  <div className="promotion-slider-content">
+                    <p>{event.title}</p>
+                    <p>{date}</p>
+                  </div>
                 </div>
-                <div className="promotion-slider-content">
-                  <p>{event.title}</p>
-                  <p>{date}</p>
-                </div>
-              </div>
-              )
-            })}
+                
+                ) 
+              })
+            }
+           
+            
           </div>
 
 
@@ -185,9 +207,9 @@ export default function ShopDetails(){
           </div>
 
           <div className="shop-info-inner">
-            <div className="shop-info-info">
+            <div  className="shop-info-info" >
               <ul>
-                <li><p><AccessTimeIcon /> <span className="open">{shopOpen}</span> : <span className="close"> Close {closeTime}</span></p></li>
+                <li><p><AccessTimeIcon /> <span className="open">{shopOpen == "Open"? shopOpen + " now" : shopOpen}</span> {shopOpen == "Open"? <span className="close">:  Closes {closeTime}</span> : <span className="close"></span>}</p></li>
                 <li><p><LocationOnIcon/> {shop.address}</p></li>
                 <li><p><LocalPhoneIcon /> {shop.telephone}</p></li>
               </ul>
@@ -203,11 +225,17 @@ export default function ShopDetails(){
           <h1>Follow Us</h1>
         </div>
         <div className="follow-section-content">
+
           <div className="follow-section-image">
-              <Link className="insta" to={shop.instagram}><InstagramIcon/></Link>
-              <Link  className="face" to={shop.facebook}><FacebookIcon/></Link>
-              <Link className="tweet" to={shop.twitter}><TwitterIcon/></Link>
-              <Link className="youtube" to={shop.youtube}><YouTubeIcon/></Link>
+          {shop.instagram ? <p className="insta"><Link  to={shop.instagram}><InstagramIcon/></Link></p>: <p></p>}
+          {shop.facebook ? <p className="face"><Link  to={shop.facebook}><FacebookIcon/></Link></p>: <p></p>}
+          {shop.twitter ? <p className="tweet"><Link  to={shop.twitter}><TwitterIcon/></Link></p>: <p></p>}
+          {shop.youtube ? <p className="youtube"><Link  to={shop.youtube}><YouTubeIcon/></Link></p>: <p></p>}
+
+          {/* <p className="insta"><Link  to={shop.instagram != undefined ? shop.instagram : "#"}><InstagramIcon/></Link></p>
+          <p className="face"><Link  to={shop.facebook != undefined ? shop.instagram : "#"}><FacebookIcon/></Link></p>
+          <p className="tweet"><Link  to={shop.twitter != undefined ? shop.instagram : "#"}><TwitterIcon/></Link></p>
+          <p className="youtube"><Link  to={shop.youtube != undefined ? shop.instagram : "#"}><YouTubeIcon/></Link></p> */}
           </div> 
           <div className="follow-product-btn">
           <Link className="viewMorePosts" to={`/shop/${shop.username}`}>View product</Link>

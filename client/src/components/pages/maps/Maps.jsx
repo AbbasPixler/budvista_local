@@ -22,15 +22,11 @@ import {
 import parkData from './skateboard-parks.json';
 
 import mapStyles from "./mapStyles";
-console.log(parkData);
 
 // ============================================================
 function Map() {
-  const [open, setOpen] = React.useState(false);
   const [selectedPark, setSelectedPark] = useState(null);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     const listener = e => {
@@ -60,8 +56,8 @@ function Map() {
             lng: park.geometry.coordinates[0]
           }}
           onClick={() => {
-            // setSelectedPark(park);
-            setOpen(true)
+            setSelectedPark(park);
+            setOpen(true);
           }}
           icon={{
             url: `/skateboarding.png`,
@@ -80,108 +76,22 @@ function Map() {
             lat: selectedPark.geometry.coordinates[1],
             lng: selectedPark.geometry.coordinates[0]
           }}
-          onClick={handleOpen}
         >
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style} onClick={handleClose}>
-                  <div className="map-popup-modal">
-                  <div className="map-popup-modal-outer">
-                    <div className="map-popup-modal-upper">
-                      <p onClick={handleClose}><ArrowBackIosNewIcon /> Back to result</p>
-                    </div>
+          <div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
+            <div><p>Hello</p></div>
 
-                    <div className="map-popup-modal-image">
-                      <div className="map-popup-modal-image-image">
-                        <img src="https://img.freepik.com/free-photo/cannabis-leaves-shoots-placed-shopping-cart_1150-19252.jpg?w=2000&t=st=1657041724~exp=1657042324~hmac=9fd3a8f8e519d5796a14c063ac28e2d0b7a9df331c82ee3ea07e539f261c5474" />
-                      </div>
-                      <div className="map-popup-mod al-image-content">
-                        <h6>Hightland cafe</h6>
-                        <p>Dispensary</p>
-                        <p>Thonglor/Bangkok</p>
-                      </div>
-                    </div>
-
-                    <div className="map-popup-modal-icon">
-                      <div className="map-popup-modal-icon-inner">
-                        <Link to="#">
-                          <LocationOnIcon />
-                          <p>Call</p>
-                        </Link>
-                      </div>
-                      <div className="map-popup-modal-icon-inner">
-                        <Link to="#">
-                          <LocalPhoneIcon />
-                          <p>Phone</p>
-                        </Link>
-                      </div>
-                      <div className="map-popup-modal-icon-inner">
-                        <Link to="#">
-                          <IosShareIcon />
-                          <p>Share</p>
-                        </Link>
-                      </div>
-                      <div className="map-popup-modal-icon-inner">
-                        <Link to="#">
-                          <FavoriteBorderIcon />
-                          <p>Favorite</p>
-                        </Link>  
-                      </div>
-                    </div>                    
-
-                    <div className="map-popup-view-btn">
-                      <Link to="#">View Menu</Link>
-                    </div>
-
-                    <div className="map-popup-modal-hours">
-                      <h2>Hours of Opertaion</h2>
-                      <p className="open">Open Now</p>
-
-                      <div className="map-popup-modal-hours-inner">
-                        <ul>
-                          <li>
-                            <h6>Monday</h6>
-                            <p>09:00 - 20:00</p>
-                          </li>
-                          <li>
-                            <h6>Monday</h6>
-                            <p>09:00 - 20:00</p>
-                          </li>
-                          <li>
-                            <h6>Monday</h6>
-                            <p>09:00 - 20:00</p>
-                          </li>
-                          <li>
-                            <h6>Monday</h6>
-                            <p>09:00 - 20:00</p>
-                          </li>
-                          <li>
-                            <h6>Monday</h6>
-                            <p>09:00 - 20:00</p>
-                          </li>
-                          <li>
-                            <h6>Monday</h6>
-                            <p>09:00 - 20:00</p>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div className="map-popup-view-btn">
-                        <Link to="#" className="viewMorePosts">View Menu</Link>
-                      </div>
-                    </div>
-                  </div>                
-                </div>
-                </Box>
-              </Modal>
-          {/* <div>
-            <h2>{selectedPark.properties.NAME}</h2>
-            <p>{selectedPark.properties.DESCRIPTIO}</p>
-          </div> */}
+            
+          
+          </div>
         </InfoWindow>
       )}
     </GoogleMap>
@@ -329,13 +239,13 @@ export default function Maps(){
                             <h6>Monday</h6>
                             <p>09:00 - 20:00</p>
                           </li>
-                        </ul>
-                      </div>
+                            </ul>
+                          </div>
 
-                      <div className="map-popup-view-btn">
-                        <Link to="#" className="viewMorePosts">View Menu</Link>
-                      </div>
-                    </div>
+                          <div className="map-popup-view-btn">
+                            <Link to="#" className="viewMorePosts">View Menu</Link>
+                          </div>
+                        </div>
                   </div>                
                 </div>
                 </Box>
