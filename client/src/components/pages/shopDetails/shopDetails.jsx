@@ -20,6 +20,7 @@ import { axiosInstance } from "./../../../config";
 // import { PicBaseUrl } from "./../../../imageBaseUrl";
 import { Context } from "./../../../context/Context";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import GoogleMap from "./GoogleMap";
 
 var BudvistaBanner = PicBaseUrl + "BudvistaBanner.jpg"
 
@@ -163,12 +164,7 @@ console.log(events == null)
 
           <div className="promotion-slider"  id="slider">
             { events.length == 0 ?
-            user 
-            ? 
-            <div className="addeventButton">
-          <Link className="addEventLink" to="/Blog">Add Events</Link>
-          </div>
-            :
+            
             <div className="noEventsdiv">No events</div>
             
             :
@@ -215,8 +211,8 @@ console.log(events == null)
               </ul>
             </div>
             <div className="shop-info-map">
-              <img src="https://www.komar.de/en/media/catalog/product/cache/5/image/9df78eab33525d08d6e5fb8d27136e95/4/-/4-050_worldmap_neu_ma_1.jpg" />
-            </div>
+                <GoogleMap/>
+                </div>
           </div>
        </div>
 
