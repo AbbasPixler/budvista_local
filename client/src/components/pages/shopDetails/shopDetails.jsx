@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../header/Header"
-import "./map.css"
+import "./shopDetails.css"
 import  { PicBaseUrl } from "../../../imageBaseUrl";
 import MapIcon from '@mui/icons-material/Map';
 import Container from "@mui/material/Container";
@@ -45,6 +45,9 @@ export default function ShopDetails(){
   const[events, setEvents] = useState([])
   const[shopOpen, setShopOpen] = useState("Close")
   const [closeTime, setCloseTime] = useState("")
+  
+  const[coordinates, setCoordinates] =useState({})
+
 
   const { user } = useContext(Context);
   console.log(user)
@@ -55,7 +58,9 @@ export default function ShopDetails(){
     const getShop = async () => {
       const res = await axiosInstance.get('/shops/' + path)
       setShop(res.data[0])
+      console.log("hello: ",res.data[0].coordinates)
 
+      setCoordinates(res.data[0].coordinates)
       let newDate = new Date().getDay() 
      
     if(newDate == 1 && res.data[0].timings[0].shopStatus == "Open"){
@@ -114,8 +119,7 @@ export default function ShopDetails(){
     fetchEvent();
   }, [path]);
 
-  console.log(events.length)
-console.log(events == null)
+  console.log("Sd",coordinates)
 
   return(
     <div>
@@ -211,7 +215,9 @@ console.log(events == null)
               </ul>
             </div>
             <div className="shop-info-map">
-                <GoogleMap/>
+                <GoogleMap
+                sendCoordinates = {coordinates}
+                />
                 </div>
           </div>
        </div>
@@ -228,10 +234,6 @@ console.log(events == null)
           {shop.twitter ? <p className="tweet"><Link  to={shop.twitter}><TwitterIcon/></Link></p>: <p></p>}
           {shop.youtube ? <p className="youtube"><Link  to={shop.youtube}><YouTubeIcon/></Link></p>: <p></p>}
 
-          {/* <p className="insta"><Link  to={shop.instagram != undefined ? shop.instagram : "#"}><InstagramIcon/></Link></p>
-          <p className="face"><Link  to={shop.facebook != undefined ? shop.instagram : "#"}><FacebookIcon/></Link></p>
-          <p className="tweet"><Link  to={shop.twitter != undefined ? shop.instagram : "#"}><TwitterIcon/></Link></p>
-          <p className="youtube"><Link  to={shop.youtube != undefined ? shop.instagram : "#"}><YouTubeIcon/></Link></p> */}
           </div> 
           <div className="follow-product-btn">
           <Link className="viewMorePosts" to={`/shop/${shop.username}`}>View product</Link>

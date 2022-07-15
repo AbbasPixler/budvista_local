@@ -27,32 +27,39 @@ import PlacesAutocomplete, {
     lng: 75.8673
    }
   ])
-
+  console.log(props.sendCoordinates)
+  if(props.sendCoordinates){
+    console.log("setingMapCenter", props.sendCoordinates.lat)
+    setMapCenter({
+      lat: props.sendCoordinates.lat,
+      lat: props.sendCoordinates.lng
+    })
+  }
   const containerStyle = {
   
     width: '40%',
     height: '45%'
   }
 
-  console.log(afterAddress.lat)
+  // console.log(afterAddress.lat)
 
-  const handleChange = (address) => {
-    setAddress(address );
-  };
+  // const handleChange = (address) => {
+  //   setAddress(address );
+  // };
  
-  const handleSelect = (address) => {
-    setAddress( address );
-    console.log(address)
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => { 
-        console.log('Success', latLng);
-        setAfterAddress(latLng)
-        // update center state
-        setMapCenter(latLng);
-      })
-      .catch(error => console.error('Error', error));
-  };
+  // const handleSelect = (address) => {
+  //   setAddress( address );
+  //   console.log(address)
+  //   geocodeByAddress(address)
+  //     .then(results => getLatLng(results[0]))
+  //     .then(latLng => { 
+  //       console.log('Success', latLng);
+  //       setAfterAddress(latLng)
+  //       // update center state
+  //       setMapCenter(latLng);
+  //     })
+  //     .catch(error => console.error('Error', error));
+  // };
 
   return (
 // ===========================================================
@@ -95,7 +102,6 @@ import PlacesAutocomplete, {
               </div>
             )}
           </PlacesAutocomplete> */}
-
           <Map 
             containerStyle={containerStyle}
             google={props.google}
@@ -108,24 +114,23 @@ import PlacesAutocomplete, {
               lng: mapCenter.lng
             }}
           >
-
-            { afterAddress.lat != undefined ?
-              <Marker
+   
+            {  props.sendCoordinates != undefined ?
+            <Marker
               position ={{
-                lat: afterAddress.lat,
-                lng: afterAddress.lng
+                lat: mapCenter.lat,
+                lng: mapCenter.lng
               }}
               />
             :
-              markers.map((marks)=>(
                 <Marker
                 position ={{
-                  lat: marks.lat,
-                  lng: marks.lng
+                  lat: 22.7195682,
+                  lng: 75.857727
                 }}
                 />
-              ))
-            }
+              
+      }  
               
          
          </Map>

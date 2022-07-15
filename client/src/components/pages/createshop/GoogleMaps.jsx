@@ -34,11 +34,15 @@ import PlacesAutocomplete, {
     height: '20%'
   }
 
-  console.log(afterAddress.lat)
+  // console.log(afterAddress.lat)
 
   const handleChange = (address) => {
     setAddress(address );
   };
+
+  console.log( "From Database: " , props.sendCoordinates)
+  console.log(props.sendCoordinates.lat)
+
  
   const handleSelect = (address) => {
     setAddress( address );
@@ -47,6 +51,7 @@ import PlacesAutocomplete, {
       .then(results => getLatLng(results[0]))
       .then(latLng => { 
         console.log('Success', latLng);
+        props.getData(latLng)
         setAfterAddress(latLng)
         // update center state
         setMapCenter(latLng);
@@ -109,7 +114,16 @@ import PlacesAutocomplete, {
             }}
           >
 
-            { afterAddress.lat != undefined ?
+            { 
+            props.sendCoordinates.lat != undefined ?
+            <Marker
+              position ={{
+                lat: props.sendCoordinates.lat,
+                lng: props.sendCoordinates.lng
+              }}
+              />
+              :
+            afterAddress.lat != undefined ?
               <Marker
               position ={{
                 lat: afterAddress.lat,
