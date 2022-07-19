@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../header/Header"
 import "./shopDetails.css"
-import  { PicBaseUrl } from "../../../imageBaseUrl";
+import  { PicBaseUrl } from "./../../../imageBaseUrl";
 import MapIcon from '@mui/icons-material/Map';
 import Container from "@mui/material/Container";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -45,12 +45,11 @@ export default function ShopDetails(){
   const[events, setEvents] = useState([])
   const[shopOpen, setShopOpen] = useState("Close")
   const [closeTime, setCloseTime] = useState("")
-  
+  const[classShop, setClassShop] = useState("close")
   const[coordinates, setCoordinates] =useState({})
 
 
   const { user } = useContext(Context);
-  console.log(user)
   const location = useLocation()
   const path = (location.pathname.split("/")[2])
 
@@ -58,42 +57,52 @@ export default function ShopDetails(){
     const getShop = async () => {
       const res = await axiosInstance.get('/shops/' + path)
       setShop(res.data[0])
-      console.log("hello: ",res.data[0].coordinates)
 
       setCoordinates(res.data[0].coordinates)
       let newDate = new Date().getDay() 
      
     if(newDate == 1 && res.data[0].timings[0].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[0].timeTo)
     }
     if(newDate == 2 && res.data[0].timings[1].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[1].timeTo)
     }
     if(newDate == 3 && res.data[0].timings[2].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[2].timeTo)
     }
     if(newDate == 4 && res.data[0].timings[3].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[3].timeTo)
     }
     if(newDate == 5 && res.data[0].timings[4].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[4].timeTo)
     }
     if(newDate == 6 && res.data[0].timings[5].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[5].timeTo)
     }
     if(newDate == 7 && res.data[0].timings[6].shopStatus == "Open"){
       setShopOpen("Open")
+      setClassShop("Open")
       setCloseTime(res.data[0].timings[6].timeTo)
     }
     };
     getShop()
   },[path])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -119,37 +128,36 @@ export default function ShopDetails(){
     fetchEvent();
   }, [path]);
 
-  console.log("Sd",coordinates)
 
   return(
     <div>
-       <Container>
-       <div className="header">
+      <Container>
+      <div className="header">
         <img className="headerImg" src={PicBaseUrl + shop.coverPhoto} alt="" />
         
-       </div>  
+      </div>  
 
        {/* shop-title */}
-       <div className="shop-title">
-          <div className="shop-location"> <p><LocationOnIcon/>{shop.address}</p></div>
+      <div className="shop-title">
+        <div className="shop-location"> <p><LocationOnIcon/>{shop.address}</p></div>
           <div className="shop-content">
             <h2>{shop.shopTitle}</h2>
             <p>{shop.shopDesc}</p>
-         </div> 
-          <div className="shop-share"> <p> <IosShareIcon/> Share</p></div>
-       </div>
+        </div> 
+        <div className="shop-share"> <p> <IosShareIcon/> Share</p></div>
+      </div>
 
-       <div className="recommended-product">
-          <div className="postsTitle">
+      <div className="recommended-product">
+        <div className="postsTitle">
             <h1>Recommended Products</h1>
-          </div>
+        </div>
 
           <div className="recommended-product-inner">
            { recommendedProducts.map((product)=>{
               return(
                 
                   <div className="recommended-product-inner-inner">
-                  <img src="https://storage.googleapis.com/snackyo/1655886005408pexels-kindel-media-7773110.jpg" />
+                  <img src= {PicBaseUrl + product.productImage} />
                 </div>
               )
             })}
@@ -209,7 +217,7 @@ export default function ShopDetails(){
           <div className="shop-info-inner">
             <div  className="shop-info-info" >
               <ul>
-                <li><p><AccessTimeIcon /> <span className="open">{shopOpen == "Open"? shopOpen + " now" : shopOpen}</span> {shopOpen == "Open"? <span className="close">:  Closes {closeTime}</span> : <span className="close"></span>}</p></li>
+                <li><p><AccessTimeIcon /> <span  className={classShop} >{shopOpen == "Open"? shopOpen + " now" : shopOpen}</span> {shopOpen == "Open"? <span className="close">:  Closes {closeTime}</span> : <span className="close"></span>}</p></li>
                 <li><p><LocationOnIcon/> {shop.address}</p></li>
                 <li><p><LocalPhoneIcon /> {shop.telephone}</p></li>
               </ul>
@@ -218,7 +226,7 @@ export default function ShopDetails(){
                 <GoogleMap
                 sendCoordinates = {coordinates}
                 />
-                </div>
+            </div>
           </div>
        </div>
 
@@ -233,8 +241,7 @@ export default function ShopDetails(){
           {shop.facebook ? <p className="face"><Link  to={shop.facebook}><FacebookIcon/></Link></p>: <p></p>}
           {shop.twitter ? <p className="tweet"><Link  to={shop.twitter}><TwitterIcon/></Link></p>: <p></p>}
           {shop.youtube ? <p className="youtube"><Link  to={shop.youtube}><YouTubeIcon/></Link></p>: <p></p>}
-
-          </div> 
+        </div> 
           <div className="follow-product-btn">
           <Link className="viewMorePosts" to={`/shop/${shop.username}`}>View product</Link>
           </div>

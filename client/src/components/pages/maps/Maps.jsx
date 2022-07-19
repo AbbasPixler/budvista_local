@@ -81,7 +81,7 @@ export default function Maps(){
   return (
     <div className="maps-main">
         <Container>
-            <div className="map-popup-outer" style={{ width: "100vw", height: "100vh" }}>
+            <div className="map-popup-outer" style={{ width: "100%", height: "100%" }}>
           {/* =========================================== */}
 
           {/* <MapWrapped
@@ -94,6 +94,7 @@ export default function Maps(){
       /> */}
       <GoogleMap
       sendShops={shop}
+
       />
 
           {/* =========================================== */}

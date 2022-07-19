@@ -73,10 +73,12 @@ import  { PicBaseUrl } from "../../../imageBaseUrl";
   const containerStyle = {
   
     width: '90%',
-    height: '80vh'
+    height: '80vh',
+    position: "sticky"
+    
   }
 
-  // console.log(afterAddress.lat)
+  console.log(props.sendShops)
 
   const handleChange = (address) => {
     setAddress(address );
@@ -134,6 +136,9 @@ import  { PicBaseUrl } from "../../../imageBaseUrl";
                   position = {{
                     lat: shop.coordinates.lat,
                     lng: shop.coordinates.lng
+                  }}
+                  icon={{
+                    url: "https://storage.googleapis.com/snackyo/map-marker1.png",
                   }}
                   />
                   )
